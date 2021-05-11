@@ -28,12 +28,14 @@ class Wallet {
     connection: Connection;
     publicKey: PublicKey;
     isConnected: boolean;
+    onChange: (wallet: Wallet | null) => void;
 
     //Constructor
     constructor(provider: string = "SOLLET", network: string = "MAINNET") {
         let providerUrl = PROVIDERS[provider];
         this.connection = new Connection(clusterApiUrl(NETWORKS["MAINNET"]));
         this.wallet = new SolanaWalletAdapter(providerUrl);
+        this.onChange = () => { };
 
         this.wallet.on('connect', this.onConnect.bind(this));
         this.wallet.on('disconnect', this.onDisconnect.bind(this));
@@ -43,12 +45,16 @@ class Wallet {
     async onConnect(publicKey: PublicKey) {
         this.publicKey = publicKey;
         this.isConnected = true;
+        this.onChange(this);
         console.log('Connected to ' + publicKey.toBase58());
     }
 
 
     async onDisconnect() {
         this.isConnected = false;
+        console.log('yooo');
+        console.log('onchangeee');
+        this.onChange(null);
         console.log('Disconnected')
     }
 
