@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
+import './Header.css';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -20,7 +21,7 @@ export default function Header() {
     const classes = useStyles();
 
     return ( 
-        <AppBar position="absolute">
+        <AppBar position="absolute" className="Header">
             <Toolbar className="header">
                 <IconButton
                     edge="start"
@@ -29,7 +30,7 @@ export default function Header() {
                     <MenuIcon />
                 </IconButton>
                 <Typography component="h1" variant="h6" color="inherit"className={classes.title} noWrap>
-                    Solana App
+                    Great Ape
                 </Typography>
             </Toolbar>
         </AppBar>

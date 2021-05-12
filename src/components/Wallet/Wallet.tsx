@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Wallet from 'lib/wallet/Wallet';
+import './Wallet.css';
 
 export default function Header() {
     const [wallet, setWallet] = useState<Wallet | null>();
@@ -18,17 +19,17 @@ export default function Header() {
     }
 
     return (
-        <div>
+        <div className="wallet">
             {wallet && wallet.isConnected ? (
                 <div>
                     <p>Wallet address: {wallet.publicKey.toBase58()} {wallet && wallet.isConnected ? "true" : "false"}</p>
-                    <Button color="inherit" variant="outlined" onClick={() => wallet.sendTransaction()}>Send Transaction</Button>
-                    <Button color="inherit" variant="outlined" onClick={() => wallet.signMessage()}>Sign Message</Button>
-                    <Button color="inherit" variant="outlined" onClick={() => wallet.disconnect()}>Disconnect</Button>
+                    <Button color="primary" variant="contained" className="button" size="large" onClick={() => wallet.sendTransaction()}>Send Transaction</Button>
+                    <Button color="primary" variant="contained" className="button" size="large" onClick={() => wallet.signMessage()}>Sign Message</Button>
+                    <Button color="primary" variant="contained" className="button" size="large" onClick={() => wallet.disconnect()}>Disconnect</Button>
                 </div>
             ) : (
                 <div>
-                    <Button color="inherit" variant="outlined" onClick={connect}>Connect Sollet</Button>
+                    <Button color="primary" variant="contained" size="large" onClick={connect}>Connect Sollet</Button>
                     {/* <button onClick={() => setSelectedWallet(injectedWallet)}>Connect to Injected Wallet</button> */}
                 </div>
             )}
